@@ -16,9 +16,21 @@
     <h1>ER DET FORTSATT ET STORT HULL PÅ FLOTMYR?</h1>
 
     <h2>JA.</h2>
-    <p>Sist sjekket: fortsatt hull.</p>
-   
+  <p id="sist-sjekket"></p>
 
+   
+<script>
+    const now = new Date();
+
+    const dato = now.toLocaleDateString('no-NO');
+    const klokkeslett = now.toLocaleTimeString('no-NO', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    document.getElementById('sist-sjekket').textContent =
+        `Sist sjekket: ${dato} kl. ${klokkeslett}`;
+</script>
 </body>
 
 </html>
