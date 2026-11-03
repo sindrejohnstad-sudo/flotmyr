@@ -15,7 +15,7 @@
 <body>
     <h1>ER DET FORTSATT ET STORT HULL PÅ FLOTMYR?</h1>
 
-    <h2>JA.</h2>
+    <h2 id="flotmyr-svar">JA.</h2>
   <p id="sist-sjekket"></p>
 
    
@@ -30,6 +30,167 @@
 
     document.getElementById('sist-sjekket').textContent =
         `Sist sjekket: ${dato} kl. ${klokkeslett}`;
+</script>
+<script>
+
+  const svaralternativer = [
+
+    "JA.",
+
+    "JEPP.",
+
+    "YES.",
+
+    "YUP.",
+
+    "ÅJA.",
+
+    "ABSOLUTT.",
+
+    "SELVFØLGELIG.",
+
+    "UTEN TVIL.",
+
+    "100 %.",
+
+    "OH YES.",
+
+    "SÌ.",
+
+    "OUI.",
+
+    "SJOKKERENDE NOK, JA.",
+
+    "TRO DET ELLER EI.",
+
+    "GJETT ÉN GANG.",
+
+    "INTET NYTT.",
+
+    "DESSVERRE.",
+
+    "SELVFØLGELIG ER DET DET.",
+
+    "HVORFOR SKULLE DET IKKE VÆRE DET?",
+
+    "IKKE HOLD PUSTEN.",
+
+    "HULL YEAH!",
+
+    "JA, SÅ DET HOLDER.",
+
+    "JA, GANSKE STORT OGSÅ.",
+
+    "JA, FAKTISK.",
+
+    "JA, OG VEL SÅ DET.",
+
+    "JA, DET GÅR BARE NEDOVER.",
+
+    "JA, SÅ KLART.",
+
+    "JA, SOM VANLIG.",
+
+    "JA, DET MÅ DU NOK REGNE MED.",
+
+    "PER DEFINISJON, JA.",
+
+    "ETTER ALLE SOLEMERKER.",
+
+    "SÅ VIDT OSS BEKJENT.",
+
+    "SOM FORVENTET.",
+
+    "JAUDA.",
+
+    "JA, KA TRUDDE DU?",
+
+    "JA, DET SKA EG LOV DEG.",
+
+    "JA, DET KAN DU BANNA PÅ.",
+
+    "JA, DET E NÅ SÅ."
+
+  ];
+
+  // Hent forrige svar
+
+  let forrigeSvar = null;
+
+  try {
+
+    forrigeSvar = localStorage.getItem("flotmyrForrigeSvar");
+
+  } catch (e) {}
+
+  // Fjern forrige svar fra trekningen
+
+  const muligeSvar = svaralternativer.filter(
+
+    svar => svar !== forrigeSvar
+
+  );
+
+  // Velg tilfeldig svar
+
+  const tilfeldigSvar = muligeSvar[
+
+    Math.floor(Math.random() * muligeSvar.length)
+
+  ];
+
+  // Vis svaret
+
+ // Vis svaret
+
+const svarElement = document.getElementById("flotmyr-svar");
+
+svarElement.textContent = tilfeldigSvar;
+
+// Tilpass skriftstørrelsen automatisk
+
+function tilpassSkriftstorrelse() {
+
+  // Start med stor skrift
+
+  let storrelse = Math.min(window.innerWidth * 0.3, 450);
+
+  svarElement.style.fontSize = storrelse + "px";
+
+  // Reduser størrelsen til hele teksten får plass
+
+  while (
+
+    svarElement.scrollWidth > svarElement.clientWidth &&
+
+    storrelse > 10
+
+  ) {
+
+    storrelse -= 2;
+
+    svarElement.style.fontSize = storrelse + "px";
+
+  }
+
+}
+
+// Tilpass ved innlasting
+
+tilpassSkriftstorrelse();
+
+// Tilpass hvis nettleservinduet endrer størrelse
+
+window.addEventListener("resize", tilpassSkriftstorrelse);
+
+  // Husk svaret til neste gang
+
+  try {
+
+    localStorage.setItem("flotmyrForrigeSvar", tilfeldigSvar);
+
+  } catch (e) {}
+
 </script>
 </body>
 

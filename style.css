@@ -71,4 +71,20 @@ h2 {
 
 
 }
+/* Dynamisk størrelse på svarteksten */
+
+#flotmyr-svar {
+
+  white-space: nowrap;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  text-align: center;
+
+  line-height: 1;
+
+  box-sizing: border-box;
+
 }
