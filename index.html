@@ -151,23 +151,43 @@ svarElement.textContent = tilfeldigSvar;
 
 function tilpassSkriftstorrelse() {
 
+  const maksBredde = document.documentElement.clientWidth * 0.9;
+
   // Start med stor skrift
 
   let storrelse = Math.min(window.innerWidth * 0.3, 450);
 
   svarElement.style.fontSize = storrelse + "px";
 
-  // Reduser størrelsen til hele teksten får plass
+  // Mål tekstens faktiske bredde
 
-  while (
+  const maler = document.createElement("span");
 
-    svarElement.scrollWidth > svarElement.clientWidth &&
+  const stil = window.getComputedStyle(svarElement);
 
-    storrelse > 10
+  maler.style.font = stil.font;
 
-  ) {
+  maler.style.letterSpacing = stil.letterSpacing;
 
-    storrelse -= 2;
+  maler.style.whiteSpace = "nowrap";
+
+  maler.style.position = "fixed";
+
+  maler.style.visibility = "hidden";
+
+  maler.textContent = svarElement.textContent;
+
+  document.body.appendChild(maler);
+
+  const tekstBredde = maler.getBoundingClientRect().width;
+
+  maler.remove();
+
+  // Reduser skriftstørrelsen hvis teksten er for bred
+
+  if (tekstBredde > maksBredde) {
+
+    storrelse = storrelse * (maksBredde / tekstBredde);
 
     svarElement.style.fontSize = storrelse + "px";
 
